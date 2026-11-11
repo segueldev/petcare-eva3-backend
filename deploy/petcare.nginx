@@ -3,10 +3,12 @@ server {
     server_name __PUBLIC_HOST__;
     client_max_body_size 1m;
 
+    # Nginx sirve CSS y JavaScript desde la carpeta generada por collectstatic.
     location /static/ {
         alias /opt/petcare/app/staticfiles/;
     }
 
+    # Gunicorn escucha solo en el equipo EC2. Nginx recibe las solicitudes públicas.
     location / {
         proxy_pass http://127.0.0.1:8011;
         proxy_set_header Host $host;

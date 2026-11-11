@@ -42,6 +42,7 @@ def home(request):
     schedules = Availability.objects.none()
     if can(request.user, "view", Availability):
         schedules = Availability.objects.filter(weekday=day.weekday()).select_related("veterinarian")
+    # La agenda muestra vencidos y los recordatorios de los próximos siete días.
     reminders = Reminder.objects.none()
     if can(request.user, "view", Reminder):
         reminders = Reminder.objects.filter(

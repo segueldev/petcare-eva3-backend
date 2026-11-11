@@ -9,6 +9,7 @@ from .resources import RELATED_FIELDS, RESOURCES
 
 
 class ClinicPermissions(DjangoModelPermissions):
+    # Las lecturas de la API también exigen el permiso de ver el modelo.
     perms_map = {
         **DjangoModelPermissions.perms_map,
         "GET": ["%(app_label)s.view_%(model_name)s"],
@@ -40,6 +41,7 @@ class ClinicViewSet(viewsets.ModelViewSet):
             raise ValidationError("El registro tiene datos asociados y no se puede eliminar.") from exc
 
 
+# El registro de recursos mantiene los mismos modelos en las vistas web y en la API.
 router = DefaultRouter()
 for slug, (model, _, fields) in RESOURCES.items():
     serializer = type(f"{model.__name__}Serializer", (ClinicSerializer,), {

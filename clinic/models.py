@@ -109,6 +109,7 @@ class Appointment(models.Model):
             raise ValidationError({"ends_at": "El término debe ser posterior al inicio."})
         if self.status == self.Status.CANCELLED or not self.veterinarian_id:
             return
+        # Los horarios semanales se registran en hora de Chile.
         start = timezone.localtime(self.starts_at)
         end = timezone.localtime(self.ends_at)
         available = Availability.objects.filter(
@@ -117,6 +118,7 @@ class Appointment(models.Model):
         )
         if start.date() != end.date() or not available.exists():
             raise ValidationError("La cita debe quedar dentro del horario del profesional.")
+        # Los extremos abiertos permiten citas consecutivas, por ejemplo 10:00–10:30 y 10:30–11:00.
         overlaps = Appointment.objects.filter(
             veterinarian_id=self.veterinarian_id,
             starts_at__lt=self.ends_at, ends_at__gt=self.starts_at,
@@ -126,6 +128,8 @@ class Appointment(models.Model):
 
     def save(self, *args, **kwargs):
         with transaction.atomic():
+            # PostgreSQL bloquea la fila del profesional durante la validación y la reserva.
+            # Una segunda petición al mismo profesional espera antes de revisar el horario.
             if self.veterinarian_id:
                 Veterinarian.objects.select_for_update().get(pk=self.veterinarian_id)
             self.clean()
@@ -186,6 +190,7 @@ class Reminder(models.Model):
             if self.pk:
                 Reminder.objects.select_for_update().get(pk=self.pk)
             super().save(*args, **kwargs)
+            # Cada recordatorio genera a lo sumo un sucesor, incluso si se vuelve a guardar.
             if self.completed and self.interval_days:
                 next_date = self.due_date + timedelta(days=self.interval_days)
                 Reminder.objects.get_or_create(previous=self, defaults={

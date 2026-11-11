@@ -19,7 +19,17 @@ Verificado el 11 de noviembre de 2026 en AWS Academy, región `us-east-1`, insta
 - **Recordatorios.** Vacunas y controles se muestran en el panel. Al completar un recordatorio con intervalo, se programa el siguiente a partir de su fecha. El aviso aparece dentro de la aplicación.
 - **Acceso.** Django autentica mediante sesiones y valida CSRF en los cambios. Los permisos de Django se aplican en web, API y Admin. Recepción no ve fichas clínicas. Los profesionales pueden gestionarlas. El administrador gestiona cuentas y permisos.
 
-## Ejecución local
+## Demostración local con un comando
+
+Descomprime el proyecto en tu PC. Abre una terminal en la carpeta que contiene `manage.py` y ejecuta:
+
+```bash
+bash iniciar_local.sh
+```
+
+La primera vez prepara el entorno, carga los datos ficticios y pide una contraseña para la cuenta `petcare_local`. En las siguientes ejecuciones usa esa misma cuenta. Abre [http://127.0.0.1:8000/](http://127.0.0.1:8000/) y pulsa Ctrl+C en la terminal para detener la aplicación. Esta demostración usa una base SQLite propia del PC. Para mostrar el requisito de PostgreSQL, usa el sitio de AWS o la configuración manual que sigue.
+
+## Ejecución local con PostgreSQL
 
 Se requiere Python 3.10 o posterior y, para usar la configuración principal, PostgreSQL. Crea primero la base y el rol local `petcare` y asigna el rol como propietario. Luego:
 
@@ -53,6 +63,8 @@ Los demás recursos de la API se encuentran en `/api/profesionales/`, `/api/hora
 
 ## Despliegue en una EC2 Ubuntu 22.04
 
+Se reutilizó la instancia y el esquema Nginx → Gunicorn → Django de la receta anterior **Sandías Pana Walter**. Esa receta desplegaba un organizador de tareas. PetCare implementa el caso veterinario asignado, utiliza su propia base PostgreSQL y cuenta con un servicio de Gunicorn separado.
+
 Nginx recibe las solicitudes públicas. Gunicorn escucha en `127.0.0.1:8011` y Django se conecta a PostgreSQL en la misma instancia. PostgreSQL y Gunicorn no requieren puertos públicos. La instalación genera la clave de Django y la contraseña de PostgreSQL en `/etc/petcare.env`.
 
 1. Inicia AWS Academy Learner Lab y comprueba que EC2 esté en ejecución. El grupo de seguridad debe admitir TCP 80 público y SSH desde tu IP.
@@ -82,6 +94,16 @@ El nombre de servidor en Nginx es la IP o DNS ingresado. En la instancia de la r
 3. Registra la ficha con diagnóstico, tratamiento, receta y exámenes. Abre el Admin y filtra citas por profesional.
 4. Marca como completado el recordatorio de vacuna y comprueba que se crea la próxima fecha.
 5. Muestra la API con la sesión abierta. Una cuenta de Recepción puede ver mascotas, pero recibe 403 en fichas clínicas.
+
+## Código para explicar en la defensa
+
+| Archivo | Qué mostrar |
+| --- | --- |
+| `clinic/models.py` | Relaciones entre tutor, mascota, cita y ficha. Validación del horario, bloqueo de reservas concurrentes en PostgreSQL y creación del próximo recordatorio. |
+| `clinic/api.py` | Cómo el serializer transforma los registros para la API y cómo los permisos de Django protegen cada operación. |
+| `clinic/admin.py` | Registro de modelos, filtros de citas y búsqueda por mascota o profesional. |
+| `petcare/settings.py` | Conexión a PostgreSQL por variables de entorno y autenticación por sesión. |
+| `deploy/petcare.nginx` y `deploy/petcare.service` | Cómo llega una solicitud desde el navegador a Django y cómo se sirven los archivos estáticos. |
 
 ## Verificación
 

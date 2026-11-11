@@ -34,6 +34,7 @@ TEMPLATES = [{
         "django.contrib.messages.context_processors.messages",
     ]},
 }]
+# Gunicorn recibe las credenciales de PostgreSQL mediante el archivo de entorno de systemd.
 DATABASES = {"default": {
     "ENGINE": "django.db.backends.postgresql",
     "NAME": os.environ.get("POSTGRES_DB", "petcare"),
