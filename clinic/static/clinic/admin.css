@@ -1,0 +1,6 @@
+#header {
+  background: repeating-linear-gradient(112deg, #143e2b 0 35px, #1b5035 35px 58px);
+  border-bottom: 4px solid #a1ca73;
+}
+#site-name a { display: inline-flex; align-items: center; gap: .65rem; color: #fffbed; }
+#site-name img { object-fit: contain; }

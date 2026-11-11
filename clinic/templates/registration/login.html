@@ -1,6 +1,18 @@
 {% extends 'clinic/base.html' %}
+{% load static %}
 {% block title %}Iniciar sesión · PetCare{% endblock %}
 {% block content %}
+<div class="login-layout">
+<aside class="walter-card walter-card-large" aria-label="Pana Walter, mascota de PetCare">
+  <div class="walter-sun"></div>
+  <img class="walter-photo" src="{% static 'clinic/tema/pana-walter.png' %}" alt="Pana Walter con casco de sandía" width="248" height="443">
+  <div class="walter-slices" aria-hidden="true">
+    <img src="{% static 'clinic/tema/sandia-amarilla.svg' %}" alt="" width="45" height="36">
+    <img src="{% static 'clinic/tema/sandia-roja.svg' %}" alt="" width="62" height="50">
+    <img src="{% static 'clinic/tema/sandia-naranja.svg' %}" alt="" width="45" height="36">
+  </div>
+  <p>Pana Walter</p>
+</aside>
 <section class="login panel">
   <h1>Iniciar sesión</h1>
   <p class="muted">Agenda veterinaria y fichas clínicas.</p>
@@ -11,4 +23,5 @@
     <button type="submit">Entrar</button>
   </form>
 </section>
+</div>
 {% endblock %}

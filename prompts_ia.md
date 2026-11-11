@@ -16,3 +16,5 @@ Benjamín pidió preparar la entrega de Backend a partir de las dos carpetas loc
 - Validar el funcionamiento antes de preparar el paquete. El apoyo ejecutó los chequeos de Django y 12 pruebas con SQLite de desarrollo. Luego se instalaron los servicios en la EC2 existente, se ejecutaron las mismas 12 pruebas con PostgreSQL y se comprobó la página pública de inicio de sesión.
 
 - Preparar la defensa en el PC. El apoyo añadió un comando de arranque local, explicó la relación con el ejercicio Sandías Pana Walter y comentó las validaciones de agenda, los permisos, la recurrencia y el despliegue.
+
+- Adaptar la interfaz de PetCare al diseño de Sandías Pana Walter. Se reutilizaron sus ilustraciones y tipografías para el acceso, la agenda y la identidad del administrador, manteniendo las entidades y los flujos del caso veterinario.

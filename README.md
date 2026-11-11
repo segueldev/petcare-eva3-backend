@@ -95,6 +95,10 @@ El nombre de servidor en Nginx es la IP o DNS ingresado. En la instancia de la r
 4. Marca como completado el recordatorio de vacuna y comprueba que se crea la próxima fecha.
 5. Muestra la API con la sesión abierta. Una cuenta de Recepción puede ver mascotas, pero recibe 403 en fichas clínicas.
 
+## Identidad visual
+
+La interfaz incorpora a Pana Walter como mascota de PetCare y reutiliza las ilustraciones de sandía, los colores y las fuentes Bangers y Comic Neue del ejercicio anterior. Las licencias de las fuentes están incluidas con los recursos estáticos.
+
 ## Código para explicar en la defensa
 
 | Archivo | Qué mostrar |

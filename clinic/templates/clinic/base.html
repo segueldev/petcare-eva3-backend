@@ -5,12 +5,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}PetCare{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'clinic/petcare.css' %}">
+  <link rel="icon" href="{% static 'clinic/tema/sandia-roja.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'clinic/petcare.css' %}?v=walter-1">
 </head>
 <body>
 <header class="bar">
   <div class="bar-inner">
-    <a class="brand" href="{% url 'home' %}">Pet<span>Care</span></a>
+    <a class="brand" href="{% url 'home' %}"><img src="{% static 'clinic/tema/sandia-roja.svg' %}" width="34" height="30" alt=""><span class="brand-name">Pet<span>Care</span></span></a>
     {% if user.is_authenticated %}
     <div class="account">
       {% if user.is_staff %}<a href="{% url 'admin:index' %}">Admin</a>{% endif %}

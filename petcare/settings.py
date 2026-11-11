@@ -27,6 +27,7 @@ ROOT_URLCONF = "petcare.urls"
 WSGI_APPLICATION = "petcare.wsgi.application"
 TEMPLATES = [{
     "BACKEND": "django.template.backends.django.DjangoTemplates",
+    "DIRS": [BASE_DIR / "clinic" / "templates"],
     "APP_DIRS": True,
     "OPTIONS": {"context_processors": [
         "django.template.context_processors.request",

@@ -1,10 +1,19 @@
 {% extends 'clinic/base.html' %}
+{% load static %}
 {% block title %}Agenda veterinaria · PetCare{% endblock %}
 {% block content %}
-<div class="heading">
-  <div><h1>Agenda veterinaria</h1><p class="muted">{{ day|date:"l j F, Y"|capfirst }}</p></div>
-  {% if perms.clinic.add_appointment %}<a class="button" href="{% url 'add' 'citas' %}">Agendar cita</a>{% endif %}
-</div>
+<section class="agenda-banner">
+  <div class="agenda-intro">
+    <h1>Agenda veterinaria</h1>
+    <p>{{ day|date:"l j F, Y"|capfirst }}</p>
+    {% if perms.clinic.add_appointment %}<a class="button" href="{% url 'add' 'citas' %}">Agendar cita</a>{% endif %}
+  </div>
+  <div class="agenda-walter" aria-hidden="true">
+    <div class="walter-sun"></div>
+    <img class="walter-photo" src="{% static 'clinic/tema/pana-walter.png' %}" alt="" width="248" height="443">
+    <img class="agenda-slice" src="{% static 'clinic/tema/sandia-roja.svg' %}" alt="" width="55" height="45">
+  </div>
+</section>
 {% if show_visits or show_schedules %}
 <form method="get" class="date-select">
   <label for="day">Ver fecha</label>

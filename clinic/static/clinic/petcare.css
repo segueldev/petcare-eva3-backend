@@ -71,3 +71,131 @@ th { white-space: nowrap; }
   .dashboard { grid-template-columns: 1fr; }
   .table-wrap { padding: .5rem; }
 }
+
+/* Tipografía y colores del proyecto Sandías Pana Walter. */
+@font-face {
+  font-family: Bangers;
+  src: url("tema/Bangers-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Comic Neue";
+  src: url("tema/ComicNeue-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Comic Neue";
+  src: url("tema/ComicNeue-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+:root {
+  font-family: "Comic Neue", system-ui, sans-serif;
+  background: #f8f7e8;
+  color: #1a2d21;
+  --green: #1b5035;
+  --line: #d8e3cb;
+  --muted: #475c4e;
+  --rind: #a7ce75;
+  --pulp: #b72543;
+  --pink: #ffe3e7;
+  --yellow: #ffd55b;
+}
+body { font-size: 1.08rem; }
+.bar {
+  background: repeating-linear-gradient(112deg, #143e2b 0 36px, #1b5035 36px 60px);
+  border-bottom: 5px solid var(--rind);
+}
+.brand { display: inline-flex; gap: .55rem; align-items: center; font: 2rem Bangers, system-ui; letter-spacing: .035em; }
+.brand .brand-name { color: #fffbed; }
+.brand .brand-name span { color: #ffd28b; }
+.nav { gap: .5rem; margin-bottom: 1.35rem; }
+.nav a { border: 1px solid transparent; }
+.nav a:hover, .nav a[aria-current] { background: #e3edcc; border-color: #b6cda0; }
+h1, h2 { font-family: Bangers, system-ui, sans-serif; color: var(--green); font-weight: 400; letter-spacing: .035em; }
+h1 { font-size: clamp(2.25rem, 5vw, 3.3rem); }
+h2 { font-size: 1.55rem; }
+.panel {
+  border: 1px solid #b8cdaa;
+  border-top: 4px solid #db5064;
+  border-radius: 1rem;
+  box-shadow: 3px 4px 0 #e5edce;
+}
+button, .button { background: var(--pulp); font-weight: 700; }
+button:hover, .button:hover { background: #922039; }
+.secondary { background: #e5eed3; color: var(--green); }
+.secondary:hover { background: #d5e6be; }
+.quiet { background: #173e2b; }
+.quiet:hover { background: #285d42; }
+.status { background: #fce6b0; color: #5c400f; font-weight: 700; }
+.login-layout {
+  display: grid;
+  grid-template-columns: .98fr 1fr;
+  max-width: 830px;
+  margin: clamp(1rem, 8vh, 5rem) auto;
+  border: 1px solid #b8cdaa;
+  border-radius: 1.4rem;
+  overflow: hidden;
+  box-shadow: 7px 8px 0 #e4eac9;
+  background: #fffefa;
+}
+.login-layout .login {
+  width: 100%; max-width: none; margin: 0; padding: clamp(1.6rem, 5vw, 3.2rem);
+  border: 0; box-shadow: none; border-radius: 0; align-self: center;
+  background: transparent;
+}
+.login form button { width: 100%; }
+.walter-card {
+  position: relative;
+  min-width: 0;
+  min-height: 390px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 104%, #f8a8b3 0 51%, transparent 51.5%), var(--pink);
+  border-right: 5px solid var(--rind);
+}
+.walter-sun {
+  position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%);
+  background: var(--yellow); border-radius: 50%; width: 215px; height: 215px;
+}
+.walter-photo {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -53%); object-fit: contain;
+  width: 285px; height: auto;
+}
+.walter-slices {
+  position: absolute; bottom: 2.75rem; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: center; gap: .5rem;
+}
+.walter-slices img:first-child { transform: rotate(-14deg); }
+.walter-slices img:last-child { transform: rotate(14deg); }
+.walter-card p {
+  position: absolute; bottom: .65rem; left: 0; right: 0; margin: 0;
+  text-align: center; font: 1.35rem Bangers, system-ui; letter-spacing: .065em; color: #6c2334;
+}
+.agenda-banner {
+  position: relative; display: flex; align-items: stretch; min-height: 176px;
+  overflow: hidden; isolation: isolate; margin-bottom: 1.25rem;
+  background: var(--pink); border: 1px solid #eab3bb; border-radius: 1.1rem;
+}
+.agenda-intro { flex: 1; min-width: 0; padding: 1.45rem; z-index: 1; }
+.agenda-intro h1 { font-size: clamp(2rem, 5vw, 3.6rem); }
+.agenda-intro p { margin: .45rem 0 1rem; color: #5c3c44; font-weight: 700; }
+.agenda-walter { position: relative; flex: 0 0 34%; min-width: 125px; }
+.agenda-walter .walter-sun { top: 60%; left: 53%; width: 150px; height: 150px; }
+.agenda-walter .walter-photo { top: 50%; left: 53%; width: 158px; }
+.agenda-slice { position: absolute; left: 15%; bottom: 13%; transform: rotate(-18deg); }
+@media (max-width: 650px) {
+  .login-layout { grid-template-columns: 1fr; margin: 1rem auto; }
+  .walter-card { min-height: 228px; border-right: 0; border-bottom: 4px solid var(--rind); }
+  .walter-card .walter-sun { width: 128px; height: 128px; top: 44%; }
+  .walter-card .walter-photo { width: 164px; top: 46%; }
+  .walter-slices { bottom: 2.15rem; gap: .3rem; }
+  .walter-slices img { width: 30px; height: auto; }
+  .walter-slices img:nth-child(2) { width: 39px; }
+  .walter-card p { bottom: .45rem; font-size: 1.15rem; }
+  .agenda-intro { padding: 1rem; }
+  .agenda-walter { min-width: 99px; }
+  .agenda-walter .walter-sun { width: 102px; height: 102px; }
+  .agenda-walter .walter-photo { width: 117px; }
+  .agenda-slice { left: 0; width: 33px; height: auto; }
+}
