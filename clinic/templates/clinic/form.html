@@ -1,0 +1,13 @@
+{% extends 'clinic/base.html' %}
+{% block title %}{{ title }} · PetCare{% endblock %}
+{% block content %}
+<section class="panel form-panel">
+  <p><a href="{% url 'listing' slug %}">Volver a {{ title|lower }}</a></p>
+  <h1>{% if editing %}Editar{% else %}Nuevo registro{% endif %}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+  </form>
+</section>
+{% endblock %}

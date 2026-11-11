@@ -1,0 +1,17 @@
+[Unit]
+Description=PetCare (Gunicorn)
+After=network.target postgresql.service
+Requires=postgresql.service
+
+[Service]
+User=petcare
+Group=petcare
+WorkingDirectory=/opt/petcare/app
+EnvironmentFile=/etc/petcare.env
+ExecStart=/opt/petcare/venv/bin/gunicorn --workers 2 --bind 127.0.0.1:8011 petcare.wsgi:application
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

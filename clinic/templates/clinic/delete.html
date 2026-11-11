@@ -1,0 +1,13 @@
+{% extends 'clinic/base.html' %}
+{% block title %}Eliminar registro · PetCare{% endblock %}
+{% block content %}
+<section class="panel form-panel">
+  <h1>Eliminar registro</h1>
+  <p>¿Quieres eliminar <strong>{{ instance }}</strong>?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button class="delete-button" type="submit">Eliminar</button>
+    <a href="{% url 'listing' slug %}">Cancelar</a>
+  </form>
+</section>
+{% endblock %}
